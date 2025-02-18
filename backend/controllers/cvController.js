@@ -162,7 +162,14 @@ const updateApplicationStatus = async (req, res) => {
     }
 };
 
+const fetchApprovedApplications = async (req, res) => {
+    try {
+        const approvedApplications = await PDF.find({ applicationStatus: 'approved' }).select('-cvs.pdfData');
+        res.status(200).json(approvedApplications);
+    } catch (error) {
+        res.status(500).json({ message: `Error fetching approved applications: ${error.message}` });
+    }
+};
 
 
-
-module.exports = { uploadPDF, fetchAllCvs, fetchLimitedData, deleteSelectedData, updateApplicationStatus };
+module.exports = { uploadPDF, fetchAllCvs, fetchLimitedData, deleteSelectedData, updateApplicationStatus, fetchApprovedApplications };

@@ -1,6 +1,6 @@
 const express = require('express');
 const { verifyToken, verifyRole } = require('../middleware/authMiddleware');
-const { uploadPDF, fetchAllCvs, fetchLimitedData, deleteSelectedData, updateApplicationStatus } = require('../controllers/cvController');  // Ensure this import is correct
+const { uploadPDF, fetchAllCvs, fetchLimitedData, deleteSelectedData, updateApplicationStatus, fetchApprovedApplications } = require('../controllers/cvController');  // Ensure this import is correct
 const router = express.Router();
 const multer = require('multer');
 
@@ -17,5 +17,6 @@ router.get('/fetch_all_CVs', verifyToken, verifyRole('admin'), fetchAllCvs);
 router.get('/fetch_limited_data/:_id', verifyToken, verifyRole('admin'), fetchLimitedData);
 router.delete('/delete_selected_data/:_id', verifyToken, verifyRole('admin'), deleteSelectedData);
 router.patch('/update_application_status/:_id', verifyToken, verifyRole('admin'), updateApplicationStatus);
+router.get('/fetch_approved_applications', verifyToken, verifyRole('admin'), fetchApprovedApplications); // New route for fetching approved applications
 
 module.exports = router;
