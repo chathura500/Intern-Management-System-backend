@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors'); // Import cors
 const autRoutes = require('./routes/authRoutes');
 const cvRoutes = require('./routes/cvRoutes');
+const interviewRoutes = require('./routes/interview_shedule_routes');
 
 const app = express();
 app.use(cors());
@@ -12,7 +13,7 @@ app.use(express.json());
 
 app.use('/api/auth', autRoutes);
 app.use('/api/cv', cvRoutes);
-
+app.use('/api/interview', interviewRoutes);
 
 mongoose.connect(process.env.MONGO_URI).then(() => 
     console.log(`MongoDB connected ${process.env.MONGO_URI}`)).catch(err => console.log(err));
