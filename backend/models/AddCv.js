@@ -45,18 +45,19 @@ const AddCv = new mongoose.Schema({
         qualification: String,
     },
 
-
     emergencyContactNumber01: { type: String, required: true },
     emergencyContactNumber02: { type: String },
     previousTrainingAtSlt: { type: Boolean, required: true },
     otherQualifications: { type: String },
 
     cvs: [{
-        pdfData: { type: Buffer},
-        fileName: { type: String},
-        fileType: { type: String},
+        pdfData: { type: Buffer },
+        fileName: { type: String },
+        fileType: { type: String },
         uploadedAt: { type: Date, default: Date.now }
     }],
+
+    applicationStatus: { type: String, enum: ['pending', 'approved', 'declined'], default: 'pending' } 
 
 }, { timestamps: true });
 
